@@ -8,10 +8,6 @@ const {
     setValueIndex,
 } = require('./rangeUtils');
 
-// test('adds 1 + 2 to equal 3', () => {
-//     expect(sum(1, 2)).toBe(3);
-// });
-
 describe('trackFinger', () => {
     test('should response object with clientX and clientY', () => {
         const event = { clientX: 20, clientY: 10 };
