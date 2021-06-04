@@ -1,5 +1,5 @@
 # Range
-Range slider component project
+Range slider component
 
 ## Init project
 ``
