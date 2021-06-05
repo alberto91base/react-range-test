@@ -1,6 +1,6 @@
 import React from 'react';
-import { valueToPercent } from './rangeUtils';
 import classNames from 'classnames';
+import { valueToPercent } from './rangeUtils';
 
 const RangeMarks = React.memo(({ mark, min, max, trackOffset }) => {
     let markOffset = valueToPercent(mark.value, min, max);

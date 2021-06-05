@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import RangeLabel from './RangeLabel';
 import RangeMarks from './RangeMarks';
@@ -196,6 +197,23 @@ const Range = ({
             </div>
         </div>
     );
+};
+
+Range.propTypes = {
+    value: PropTypes.arrayOf(
+        PropTypes.number
+    ).isRequired,
+    step: PropTypes.number,
+    min: PropTypes.number.isRequired,
+    max: PropTypes.number.isRequired,
+    onChange: PropTypes.func,
+    onMouseDown: PropTypes.func,
+    marks: PropTypes.arrayOf(
+        PropTypes.shape({
+            value: PropTypes.number,
+        })
+    ),
+    permitEditValues: PropTypes.bool,
 };
 
 export default Range;
