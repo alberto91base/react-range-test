@@ -1,8 +1,8 @@
 import { useRef, useState, useEffect } from 'react';
 
-import classNames from 'classnames';
-
 import RangeLabel from './RangeLabel';
+import RangeMarks from './RangeMarks';
+import RangePointers from './RangePointers';
 
 import {
     trackFinger,
@@ -30,7 +30,6 @@ const Range = ({
     permitEditValues,
 }) => {
     const sliderRef = useRef();
-    const pointerRef = useRef();
     const [values, setValues] = useState(value);
     const indexSelected = useRef();
 
@@ -150,57 +149,32 @@ const Range = ({
 
     const htmlMarks =
         marks &&
-        marks.map((item, index) => {
-            let markOffset = valueToPercent(item.value, min, max);
-            const classRangeMark = classNames({
-                range__mark: true,
-                'range__mark--active': trackOffset <= markOffset,
-            });
-            const classRangeMarkLabel = classNames({
-                range__mark__label: true,
-                'range__mark__label--active': trackOffset <= markOffset,
-            });
+        marks.map((mark, index) => {
             return (
-                <div key={index}>
-                    <span
-                        data-index={index}
-                        className={classRangeMark}
-                        style={{ left: `${markOffset}%` }}
-                    ></span>
-                    <span
-                        data-index={index}
-                        className={classRangeMarkLabel}
-                        style={{ left: `${markOffset}%` }}
-                    >
-                        {item.label}
-                    </span>
-                </div>
+                <RangeMarks
+                    key={index}
+                    mark={mark}
+                    min={min}
+                    max={max}
+                    trackOffset={trackOffset}
+                />
             );
         });
 
     const htmlPointers =
         values &&
         values.map((item, index) => {
-            const trackOffsetValue = valueToPercent(item, min, max);
             return (
-                <span
+                <RangePointers
                     key={index}
-                    className="range__pointer"
-                    ref={pointerRef}
-                    onMouseDown={(e) => handleMouseDown(e, index)}
-                    style={{ left: trackOffsetValue + '%' }}
-                >
-                    <span className="range__pointer__value">
-                        <span className="range__pointer__value__content">
-                            <span className="range__pointer__value__content__text">
-                                {item}
-                            </span>
-                        </span>
-                    </span>
-                </span>
+                    pointer={item}
+                    index={index}
+                    min={min}
+                    max={max}
+                    handleMouseDown={handleMouseDown}
+                />
             );
         });
-
 
     return (
         <div className={className}>
