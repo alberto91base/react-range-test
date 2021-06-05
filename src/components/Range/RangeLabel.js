@@ -1,7 +1,7 @@
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import classNames from 'classnames';
 
-const RangeLabel = ({ marks, values, onChangeValues, permitEditValues }) => {
+const RangeLabel = React.memo(({ marks, values, onChangeValues, permitEditValues }) => {
     const inputValueMinRef = useRef();
     const inputValueMaxRef = useRef();
     const [inputValueMinEnable, setInputValueMinEnable] = useState(false);
@@ -109,6 +109,6 @@ const RangeLabel = ({ marks, values, onChangeValues, permitEditValues }) => {
             )}
         </div>
     );
-};
+});
 
 export default RangeLabel;
